@@ -1,5 +1,7 @@
 import React from 'react';
 import './style.css';
+import Fact from './Fact';
+
 
 const CATEGORIES = [
     { name: "technology", color: "#3b82f6" },
@@ -52,7 +54,7 @@ function FactList() {
     return (
         <>
             <section><ul className="facts-list">{
-                facts.map((fact) => <li>Fact</li>)
+                facts.map((fact) => <Fact fact={fact} />)
             }</ul></section>
         </>
     )
