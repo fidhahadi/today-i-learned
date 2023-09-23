@@ -8,19 +8,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@400;600&display=swap" rel="stylesheet">
     
     <link href="style.css" rel="stylesheet" />
    
   </head>
   <body>
-    <header>
-      <img src="logo.png" height="68" width="68" alt="Today I Learned Logo" />
+    <div class="container">
+    <header class="header">
+      <div class="logo">
+      <img  src="logo.png" height="68" width="68" alt="Today I Learned Logo" />
       <h1>Today I Learned</h1>
-      <button>Share a fact</button>
+    </div>
+
+      <button class="btn btn-large">Share a fact</button>
     </header>
 
-    <form>
+    <form class="fact-form">
       <input type="text" placeholder="Share a fact with the world..." />
       <span>200</span>
       <input type="text" placeholder="Trustworthy source..." />
@@ -30,49 +34,49 @@
         <option value="science">Science</option>
         <option value="finance">Finance</option>
       </select>
-      <button>Post</button>
+      <button class="btn btn-large">Post</button>
     </form>
 
-    <main>
+    <main class="main">
       <aside>
         <ul>
-          <li><button>All</button></li>
-          <li>
-            <button>Technology</button>
+          <li><button class="btn btn-all-categories">All</button></li>
+          <li class="category">
+            <button class="btn btn-category" style="background-color: #3b82f6;">Technology</button>
           </li>
-          <li>
-            <button>Science</button>
+          <li class="category">
+            <button class="btn btn-category" style="background-color: #eab308;">Science</button>
           </li>
         </ul>
       </aside>
 
       <section>
         <ul>
-          <li>
-            <p class="fact">
+          <li class="fact">
+            <p >
               React is being developed by Meta (formerly facebook)
-              <a href="https://opensource.fb.com/" target="_blank">(Source)</a>
-              <span class="tag" >#technology#</span>
+              <a class="source" href="https://opensource.fb.com/" target="_blank">(Source)</a>
             </p>
-            <div>
-              <button>👍 <strong>24</strong></button>
-              <button>🤯 <strong>9</strong></button>
-              <button>⛔️ <strong>4</strong></button>
+            <span class="tag" style="background-color: #3b82f6;">#technology#</span>
+            <div class="vote-buttons">
+              <button>👍 24</button>
+              <button>🤯 9</button>
+              <button>⛔️ 4</button>
             </div>
           </li>
-          <li>
-            <p class="fact">
+          <li class="fact">
+            <p>
               Millennial dads spend 3 times as much time with their kids than
               their fathers spent with them. In 1982, 43% of fathers had never
               changed a diaper. Today, that number is down to 3%
-              <a
+              <a class="source"
                 href="https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids"
                 target="_blank"
                 >(Source)</a
               >
-              <span class="tag">#society#</span>
             </p>
-            <div>
+            <span class="tag"  style="background-color: #eab308;">#society#</span>
+            <div class="vote-buttons">
               <button>👍 <strong>11</strong></button>
               <button>🤯 <strong>2</strong></button>
               <button>⛔️ <strong>0</strong></button>
@@ -81,5 +85,6 @@
         </ul>
       </section>
     </main>
+  </div>
   </body>
 </html>
