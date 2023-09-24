@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import supabase from './supabase';
 import './style.css';
 import CategoryFilters from './CategoryFilters';
 import FactList from './FactList';
 import NewFactForm from './NewFactForm';
+
 
 
 const initialFacts = [
@@ -41,7 +43,19 @@ const initialFacts = [
 
 function App() {
   const [showForm, setshowForm] = useState(false);
-  const [facts, setFacts] = useState(initialFacts);
+  const [facts, setFacts] = useState([]);
+
+
+  useEffect(function () {
+    async function getFacts() {
+      const { data: facts, error } = await supabase
+        .from('facts')
+        .select('*')
+      setFacts(facts);
+      console.log(facts);
+    }
+    getFacts();
+  }, [])
 
   return (
     <>
