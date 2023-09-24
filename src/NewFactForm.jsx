@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './style.css';
+import supabase from './supabase';
+
 
 
 const CATEGORIES = [
@@ -29,9 +31,10 @@ function NewFactForm({ setFacts, setshowForm }) {
     const [text, setText] = useState("");
     const [source, setSource] = useState("");
     const [category, setcategory] = useState("");
+    const [isUploading, setisUploading] = useState(false);
     const textLength = text.length;
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         //1. Prevent browser reload
         e.preventDefault();
 
@@ -39,20 +42,25 @@ function NewFactForm({ setFacts, setshowForm }) {
 
         //2. check if data is valid,if so create a new fact
         if (text && isValidHttpUrl(source) && category && textLength <= 200) {
-            const newFact = {
-                id: Math.round(Math.random() * 10000000),
-                text,
-                source,
-                category,
-                votesInteresting: 0,
-                votesMindblowing: 0,
-                votesFalse: 0,
-                createdIn: new Date().getFullYear(),
-            };
+            // const newFact = {
+            //     id: Math.round(Math.random() * 10000000),
+            //     text,
+            //     source,
+            //     category,
+            //     votesInteresting: 0,
+            //     votesMindblowing: 0,
+            //     votesFalse: 0,
+            //     createdIn: new Date().getFullYear(),
+            // };
+            //upload fact to supabase and receive the new fact object
+            setisUploading(true);
+            const { data: newFact, error } = await supabase.from("facts").insert([{ text, source, category }]).select();
+            setisUploading(false);
+
 
             //4.add the new fact to the ui , add the fact state\
             // adding the previous facts to the newly added fact
-            setFacts((facts) => [newFact, ...facts]);
+            setFacts((facts) => [newFact[0], ...facts]);
             setText("");
             setSource("");
             setcategory("");
@@ -69,15 +77,15 @@ function NewFactForm({ setFacts, setshowForm }) {
     return (
 
         <form className="formEl fact-form" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Share a fact with the world..." value={text}
+            <input type="text" disabled={isUploading} placeholder="Share a fact with the world..." value={text}
                 onChange={(e) => setText(e.target.value)} />
             <span>{200 - textLength}</span>
-            <input type="text" value={source} onChange={(e) => setSource(e.target.value)} placeholder="Trustworthy source..." />
-            <select value={category} onChange={(e) => setcategory(e.target.value)}>
+            <input type="text" disabled={isUploading} value={source} onChange={(e) => setSource(e.target.value)} placeholder="Trustworthy source..." />
+            <select value={category} disabled={isUploading} onChange={(e) => setcategory(e.target.value)}>
                 <option value="">Choose category:</option>
                 {CATEGORIES.map((cat) => <option key={cat.name} value={cat.name}>{cat.name.toUpperCase()}</option>)}
             </select>
-            <button className="btn btn-large">Post</button>
+            <button className="btn btn-large" disabled={isUploading} >Post</button>
         </form>
 
     )
