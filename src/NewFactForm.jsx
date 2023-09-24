@@ -25,7 +25,7 @@ function isValidHttpUrl(string) {
     return url.protocol === "http:" || url.protocol === "https:";
 }
 
-function NewFactForm() {
+function NewFactForm({ setFacts }) {
     const [text, setText] = useState("");
     const [source, setSource] = useState("");
     const [category, setcategory] = useState("");
@@ -47,15 +47,16 @@ function NewFactForm() {
                 votesInteresting: 0,
                 votesMindblowing: 0,
                 votesFalse: 0,
-                createdIn: new Date().getCurrentYear(),
+                createdIn: new Date().getFullYear(),
             };
+
+            //4.add the new fact to the ui , add the fact state\
+            // adding the previous facts to the newly added fact
+            setFacts((facts) => [newFact, ...facts]);
         }
 
-
-
-
         //.3. create new fact object
-        //4.add the new fact to the ui , add the fact state
+
         //5. reset input fields
         // 6. close the form
 

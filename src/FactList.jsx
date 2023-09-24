@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import Fact from './Fact';
 
@@ -40,8 +40,7 @@ const initialFacts = [
 ];
 
 
-function FactList() {
-    const facts = initialFacts;
+function FactList({ facts }) {
     return (
         <>
             <section><ul className="facts-list">{
