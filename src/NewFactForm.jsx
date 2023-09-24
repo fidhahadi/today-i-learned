@@ -38,8 +38,18 @@ function NewFactForm() {
         console.log(text, source, category);
 
         //2. check if data is valid,if so create a new fact
-        if (text && isValidHttpUrl(source) && category && textLength <= 200)
-            console.log("there is data");
+        if (text && isValidHttpUrl(source) && category && textLength <= 200) {
+            const newFact = {
+                id: Math.round(Math.random() * 10000000),
+                text,
+                source,
+                category,
+                votesInteresting: 0,
+                votesMindblowing: 0,
+                votesFalse: 0,
+                createdIn: new Date().getCurrentYear(),
+            };
+        }
 
 
 
