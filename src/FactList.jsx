@@ -4,6 +4,12 @@ import Fact from './Fact';
 
 
 function FactList({ facts }) {
+
+    if (facts.length === 0)
+        return (<p className='message'>No Facts for this category yet. Create a new one !!</p>
+        );
+
+
     return (
         <>
             <section><ul className="facts-list">{
