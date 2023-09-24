@@ -46,7 +46,7 @@ function App() {
   return (
     <>
       <Header showForm={showForm} setshowForm={setshowForm} />
-      {showForm ? <NewFactForm setFacts={setFacts} /> : null}
+      {showForm ? <NewFactForm setFacts={setFacts} setshowForm={setshowForm} /> : null}
       <main className='main'>
         <CategoryFilters />
         <FactList facts={facts} />
