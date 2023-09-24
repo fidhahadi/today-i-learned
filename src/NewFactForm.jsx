@@ -56,7 +56,7 @@ function NewFactForm({ setFacts, setshowForm }) {
             setisUploading(true);
             const { data: newFact, error } = await supabase.from("facts").insert([{ text, source, category }]).select();
             setisUploading(false);
-
+            console.log(error);
 
             //4.add the new fact to the ui , add the fact state\
             // adding the previous facts to the newly added fact

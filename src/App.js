@@ -38,7 +38,7 @@ function App() {
       {showForm ? <NewFactForm setFacts={setFacts} setshowForm={setshowForm} /> : null}
       <main className='main'>
         <CategoryFilters setcurrentCategory={setcurrentCategory} />
-        {isLoading ? <Loader /> : <FactList facts={facts} />}
+        {isLoading ? <Loader /> : <FactList facts={facts} setFacts={setFacts} />}
 
       </main>
     </>
