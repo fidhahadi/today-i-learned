@@ -6,53 +6,25 @@ import FactList from './FactList';
 import NewFactForm from './NewFactForm';
 
 
-
-const initialFacts = [
-  {
-    id: 1,
-    text: "React is being developed by Meta (formerly facebook)",
-    source: "https://opensource.fb.com/",
-    category: "technology",
-    votesInteresting: 24,
-    votesMindblowing: 9,
-    votesFalse: 4,
-    createdIn: 2021,
-  },
-  {
-    id: 2,
-    text: "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
-    source:
-      "https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids",
-    category: "society",
-    votesInteresting: 11,
-    votesMindblowing: 2,
-    votesFalse: 0,
-    createdIn: 2019,
-  },
-  {
-    id: 3,
-    text: "Lisbon is the capital of Portugal",
-    source: "https://en.wikipedia.org/wiki/Lisbon",
-    category: "society",
-    votesInteresting: 8,
-    votesMindblowing: 3,
-    votesFalse: 1,
-    createdIn: 2015,
-  },
-];
-
 function App() {
   const [showForm, setshowForm] = useState(false);
   const [facts, setFacts] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
 
 
   useEffect(function () {
     async function getFacts() {
+      setisLoading(true);
       const { data: facts, error } = await supabase
         .from('facts')
-        .select('*')
-      setFacts(facts);
-      console.log(facts);
+        .select('*').order('votesInteresting', { ascending: false }).limit(1000);
+
+
+      console.log(error);
+      if (!error)
+        setFacts(facts);
+      else alert("There was a problem getting a data");
+      setisLoading(false);
     }
     getFacts();
   }, [])
@@ -63,12 +35,18 @@ function App() {
       {showForm ? <NewFactForm setFacts={setFacts} setshowForm={setshowForm} /> : null}
       <main className='main'>
         <CategoryFilters />
-        <FactList facts={facts} />
+        {isLoading ? <Loader /> : <FactList facts={facts} />}
 
       </main>
     </>
   )
 }
+
+
+function Loader() {
+  return <p className="message">Loading....</p>
+}
+
 function Header({ showForm, setshowForm }) {
   return <>
     <header className="header">
