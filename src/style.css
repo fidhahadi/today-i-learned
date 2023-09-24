@@ -30,11 +30,17 @@ body{
     margin-right: 10px;
 }
 
-.container {
+#root{
     max-width: 1500px;
     margin: 0 auto;
     
 }
+
+/* .container {
+    max-width: 1500px;
+    margin: 0 auto;
+    
+} */
 
 .header{
     margin-bottom: 40px;
@@ -48,6 +54,15 @@ body{
         gap: 16px;
     }
 }
+
+section{
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
 .logo{
     display: flex;
     align-items: center;
@@ -60,6 +75,7 @@ body{
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 48px;
+    height: 60vh;
 }
 @media (max-width:900px){
     .main{
